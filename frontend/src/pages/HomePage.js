@@ -67,16 +67,16 @@ const HomePage = () => {
 
       {/* Hero Section */}
       <section className="relative py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-radial from-primary/15 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-radial from-[#FF7F00]/15 via-transparent to-transparent" />
         <div className="max-w-7xl mx-auto px-6 text-center relative z-10">
-          <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-6 text-foreground" data-testid="hero-title">
+          <h1 className={`text-5xl md:text-6xl font-bold tracking-tight mb-6 ${isDark ? 'text-white' : 'text-[#1A1A1A]'}`} data-testid="hero-title">
             {content.hero_title || 'Welcome to BUTEX Debating Club'}
           </h1>
-          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto" data-testid="hero-subtitle">
+          <p className={`text-xl mb-8 max-w-2xl mx-auto ${isDark ? 'text-gray-400' : 'text-gray-600'}`} data-testid="hero-subtitle">
             {content.hero_subtitle || 'Empowering voices, shaping leaders'}
           </p>
           <Link to="/signup">
-            <Button className="bg-primary text-primary-foreground hover:bg-primary/90 font-medium px-8 py-6 text-lg" data-testid="hero-get-started-button">
+            <Button className="bg-[#FF7F00] text-white hover:bg-[#E67300] font-medium px-8 py-6 text-lg" data-testid="hero-get-started-button">
               Get Started <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </Link>
@@ -84,19 +84,19 @@ const HomePage = () => {
       </section>
 
       {/* About Section */}
-      <section className="py-16 bg-card/40">
+      <section className={`py-16 ${isDark ? 'bg-black/40' : 'bg-gray-50'}`}>
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-12">
-            <Card className="bg-card border-border hover:border-primary/50 transition-all" data-testid="about-university-card">
+            <Card className={`${isDark ? 'bg-[#000000] border-[#333333]' : 'bg-white border-gray-200'} hover:border-[#FF7F00]/50 transition-all`} data-testid="about-university-card">
               <CardContent className="p-8">
-                <h2 className="text-3xl font-semibold mb-4 text-primary">About Bangladesh University of Textiles</h2>
-                <p className="text-muted-foreground leading-relaxed">{content.about_university}</p>
+                <h2 className="text-3xl font-semibold mb-4 text-[#FF7F00]">About Bangladesh University of Textiles</h2>
+                <p className={isDark ? 'text-gray-300' : 'text-gray-700'} + " leading-relaxed"}>{content.about_university}</p>
               </CardContent>
             </Card>
-            <Card className="bg-card border-border hover:border-primary/50 transition-all" data-testid="about-club-card">
+            <Card className={`${isDark ? 'bg-[#000000] border-[#333333]' : 'bg-white border-gray-200'} hover:border-[#FF7F00]/50 transition-all`} data-testid="about-club-card">
               <CardContent className="p-8">
-                <h2 className="text-3xl font-semibold mb-4 text-primary">About BUTEX Debating Club</h2>
-                <p className="text-muted-foreground leading-relaxed">{content.about_club}</p>
+                <h2 className="text-3xl font-semibold mb-4 text-[#FF7F00]">About BUTEX Debating Club</h2>
+                <p className={`${isDark ? 'text-gray-300' : 'text-gray-700'} leading-relaxed`}>{content.about_club}</p>
               </CardContent>
             </Card>
           </div>
@@ -107,15 +107,15 @@ const HomePage = () => {
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-gradient-to-br from-primary/10 to-transparent border border-border rounded-lg p-8" data-testid="mission-card">
-              <Trophy className="h-12 w-12 text-primary mb-4" />
-              <h3 className="text-2xl font-semibold mb-3 text-foreground">Mission</h3>
-              <p className="text-muted-foreground">{content.mission}</p>
+            <div className={`bg-gradient-to-br from-[#FF7F00]/10 to-transparent ${isDark ? 'border-[#333333]' : 'border-gray-200'} border rounded-lg p-8`} data-testid="mission-card">
+              <Trophy className="h-12 w-12 text-[#FF7F00] mb-4" />
+              <h3 className={`text-2xl font-semibold mb-3 ${isDark ? 'text-white' : 'text-[#1A1A1A]'}`}>Mission</h3>
+              <p className={isDark ? 'text-gray-300' : 'text-gray-700'}>{content.mission}</p>
             </div>
-            <div className="bg-gradient-to-br from-primary/10 to-transparent border border-border rounded-lg p-8" data-testid="vision-card">
-              <BookOpen className="h-12 w-12 text-primary mb-4" />
-              <h3 className="text-2xl font-semibold mb-3 text-foreground">Vision</h3>
-              <p className="text-muted-foreground">{content.vision}</p>
+            <div className={`bg-gradient-to-br from-[#FF7F00]/10 to-transparent ${isDark ? 'border-[#333333]' : 'border-gray-200'} border rounded-lg p-8`} data-testid="vision-card">
+              <BookOpen className="h-12 w-12 text-[#FF7F00] mb-4" />
+              <h3 className={`text-2xl font-semibold mb-3 ${isDark ? 'text-white' : 'text-[#1A1A1A]'}`}>Vision</h3>
+              <p className={isDark ? 'text-gray-300' : 'text-gray-700'}>{content.vision}</p>
             </div>
           </div>
         </div>

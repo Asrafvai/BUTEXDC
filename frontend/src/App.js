@@ -96,35 +96,37 @@ const AdminRoute = ({ children }) => {
 
 function App() {
   return (
-    <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          {/* Setup */}
-          <Route path="/setup" element={<SetupPage />} />
+    <ThemeProvider>
+      <AuthProvider>
+        <BrowserRouter>
+          <Routes>
+            {/* Setup */}
+            <Route path="/setup" element={<SetupPage />} />
 
-          {/* Public routes */}
-          <Route path="/" element={<SetupCheck><HomePage /></SetupCheck>} />
-          <Route path="/leadership" element={<SetupCheck><LeadershipPage /></SetupCheck>} />
-          <Route path="/success" element={<SetupCheck><PreviousSuccessPage /></SetupCheck>} />
-          <Route path="/announcements" element={<SetupCheck><AnnouncementsPage /></SetupCheck>} />
-          <Route path="/courses" element={<SetupCheck><CoursesPage /></SetupCheck>} />
+            {/* Public routes */}
+            <Route path="/" element={<SetupCheck><HomePage /></SetupCheck>} />
+            <Route path="/leadership" element={<SetupCheck><LeadershipPage /></SetupCheck>} />
+            <Route path="/success" element={<SetupCheck><PreviousSuccessPage /></SetupCheck>} />
+            <Route path="/announcements" element={<SetupCheck><AnnouncementsPage /></SetupCheck>} />
+            <Route path="/courses" element={<SetupCheck><CoursesPage /></SetupCheck>} />
 
-          {/* Auth routes */}
-          <Route path="/login" element={<SetupCheck><LoginPage /></SetupCheck>} />
-          <Route path="/signup" element={<SetupCheck><SignupPage /></SetupCheck>} />
+            {/* Auth routes */}
+            <Route path="/login" element={<SetupCheck><LoginPage /></SetupCheck>} />
+            <Route path="/signup" element={<SetupCheck><SignupPage /></SetupCheck>} />
 
-          {/* Protected student routes */}
-          <Route path="/dashboard" element={<ProtectedRoute><StudentDashboard /></ProtectedRoute>} />
-          <Route path="/course/:courseId" element={<ProtectedRoute><CourseDetailPage /></ProtectedRoute>} />
-          <Route path="/course/:courseId/module/:moduleId" element={<ProtectedRoute><ModulePlayerPage /></ProtectedRoute>} />
-          <Route path="/coach" element={<ProtectedRoute><CoachPage /></ProtectedRoute>} />
+            {/* Protected student routes */}
+            <Route path="/dashboard" element={<ProtectedRoute><StudentDashboard /></ProtectedRoute>} />
+            <Route path="/course/:courseId" element={<ProtectedRoute><CourseDetailPage /></ProtectedRoute>} />
+            <Route path="/course/:courseId/module/:moduleId" element={<ProtectedRoute><ModulePlayerPage /></ProtectedRoute>} />
+            <Route path="/coach" element={<ProtectedRoute><CoachPage /></ProtectedRoute>} />
 
-          {/* Protected admin routes */}
-          <Route path="/admin/*" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
-        </Routes>
-        <Toaster position="top-right" />
-      </BrowserRouter>
-    </AuthProvider>
+            {/* Protected admin routes */}
+            <Route path="/admin/*" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
+          </Routes>
+          <Toaster position="top-right" />
+        </BrowserRouter>
+      </AuthProvider>
+    </ThemeProvider>
   );
 }
 

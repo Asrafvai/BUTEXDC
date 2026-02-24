@@ -9,16 +9,17 @@
 body {
   font-family: 'Inter', sans-serif;
   line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.dark body {
+:root.dark body {
   background-color: #1A1A1A;
   color: #F0F0F0;
 }
 
-.light body {
+:root.light body {
   background-color: #FFFFFF;
-  color: #141414;
+  color: #1A1A1A;
 }
 
 .mono {

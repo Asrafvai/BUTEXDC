@@ -37,20 +37,29 @@ const HomePage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#1A1A1A]">
+    <div className="min-h-screen bg-background transition-colors duration-300">
       {/* Navbar */}
-      <nav className="sticky top-0 z-50 backdrop-blur-xl bg-black/60 border-b border-white/10">
+      <nav className="sticky top-0 z-50 backdrop-blur-xl bg-card/60 border-b border-border">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <Link to="/" className="flex items-center gap-3" data-testid="home-logo-link">
-            <img src="https://customer-assets.emergentagent.com/job_ab946127-7f68-445f-8cd6-0f1a2495b5eb/artifacts/rbz8vyvc_image.png" alt="BUTEX DC Logo" className="h-12" />
+            <img src="https://customer-assets.emergentagent.com/job_ab946127-7f68-445f-8cd6-0f1a2495b5eb/artifacts/rbz8vyvc_image.png" alt="BUTEX DC Logo" className="h-16" />
           </Link>
           <div className="flex items-center gap-6">
-            <Link to="/leadership" className="text-gray-300 hover:text-[#FF7F00] transition" data-testid="nav-leadership-link">Leadership</Link>
-            <Link to="/success" className="text-gray-300 hover:text-[#FF7F00] transition" data-testid="nav-success-link">Success</Link>
-            <Link to="/announcements" className="text-gray-300 hover:text-[#FF7F00] transition" data-testid="nav-announcements-link">Announcements</Link>
-            <Link to="/courses" className="text-gray-300 hover:text-[#FF7F00] transition" data-testid="nav-courses-link">Courses</Link>
+            <Link to="/leadership" className="text-muted-foreground hover:text-primary transition" data-testid="nav-leadership-link">Leadership</Link>
+            <Link to="/success" className="text-muted-foreground hover:text-primary transition" data-testid="nav-success-link">Success</Link>
+            <Link to="/announcements" className="text-muted-foreground hover:text-primary transition" data-testid="nav-announcements-link">Announcements</Link>
+            <Link to="/courses" className="text-muted-foreground hover:text-primary transition" data-testid="nav-courses-link">Courses</Link>
+            <Button
+              onClick={toggleTheme}
+              variant="outline"
+              size="icon"
+              className="border-border"
+              data-testid="theme-toggle-button"
+            >
+              {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+            </Button>
             <Link to="/login">
-              <Button className="bg-[#FF7F00] text-black hover:bg-[#E67300] font-medium" data-testid="nav-login-button">Login</Button>
+              <Button className="bg-primary text-primary-foreground hover:bg-primary/90 font-medium" data-testid="nav-login-button">Login</Button>
             </Link>
           </div>
         </div>

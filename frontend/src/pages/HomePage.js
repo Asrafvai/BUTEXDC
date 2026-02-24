@@ -90,7 +90,7 @@ const HomePage = () => {
             <Card className={`${isDark ? 'bg-[#000000] border-[#333333]' : 'bg-white border-gray-200'} hover:border-[#FF7F00]/50 transition-all`} data-testid="about-university-card">
               <CardContent className="p-8">
                 <h2 className="text-3xl font-semibold mb-4 text-[#FF7F00]">About Bangladesh University of Textiles</h2>
-                <p className={isDark ? 'text-gray-300' : 'text-gray-700'} + " leading-relaxed"}>{content.about_university}</p>
+                <p className={`${isDark ? 'text-gray-300' : 'text-gray-700'} leading-relaxed`}>{content.about_university}</p>
               </CardContent>
             </Card>
             <Card className={`${isDark ? 'bg-[#000000] border-[#333333]' : 'bg-white border-gray-200'} hover:border-[#FF7F00]/50 transition-all`} data-testid="about-club-card">

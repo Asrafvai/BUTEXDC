@@ -17,13 +17,18 @@ export const ThemeProvider = ({ children }) => {
   });
 
   useEffect(() => {
+    // Apply theme immediately on mount
+    const root = document.documentElement;
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    
     if (isDark) {
-      document.documentElement.classList.add('dark');
-      document.documentElement.classList.remove('light');
+      root.classList.add('dark');
+      root.classList.remove('light');
+      root.style.colorScheme = 'dark';
     } else {
-      document.documentElement.classList.add('light');
-      document.documentElement.classList.remove('dark');
+      root.classList.add('light');
+      root.classList.remove('dark');
+      root.style.colorScheme = 'light';
     }
   }, [isDark]);
 

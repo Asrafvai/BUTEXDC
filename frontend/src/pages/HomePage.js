@@ -10,6 +10,7 @@ const HomePage = () => {
   const [content, setContent] = useState({});
   const [leadership, setLeadership] = useState([]);
   const [announcements, setAnnouncements] = useState([]);
+  const { isDark, toggleTheme } = useTheme();
 
   useEffect(() => {
     loadData();

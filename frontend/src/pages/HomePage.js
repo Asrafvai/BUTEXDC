@@ -37,29 +37,29 @@ const HomePage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background transition-colors duration-300">
+    <div className={`min-h-screen transition-colors duration-300 ${isDark ? 'bg-[#1A1A1A]' : 'bg-white'}`}>
       {/* Navbar */}
-      <nav className="sticky top-0 z-50 backdrop-blur-xl bg-card/60 border-b border-border">
+      <nav className={`sticky top-0 z-50 backdrop-blur-xl border-b ${isDark ? 'bg-black/60 border-white/10' : 'bg-white/80 border-gray-200'}`}>
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <Link to="/" className="flex items-center gap-3" data-testid="home-logo-link">
             <img src="https://customer-assets.emergentagent.com/job_ab946127-7f68-445f-8cd6-0f1a2495b5eb/artifacts/rbz8vyvc_image.png" alt="BUTEX DC Logo" className="h-16" />
           </Link>
           <div className="flex items-center gap-6">
-            <Link to="/leadership" className="text-muted-foreground hover:text-primary transition" data-testid="nav-leadership-link">Leadership</Link>
-            <Link to="/success" className="text-muted-foreground hover:text-primary transition" data-testid="nav-success-link">Success</Link>
-            <Link to="/announcements" className="text-muted-foreground hover:text-primary transition" data-testid="nav-announcements-link">Announcements</Link>
-            <Link to="/courses" className="text-muted-foreground hover:text-primary transition" data-testid="nav-courses-link">Courses</Link>
+            <Link to="/leadership" className={`transition ${isDark ? 'text-gray-300 hover:text-[#FF7F00]' : 'text-gray-700 hover:text-[#FF7F00]'}`} data-testid="nav-leadership-link">Leadership</Link>
+            <Link to="/success" className={`transition ${isDark ? 'text-gray-300 hover:text-[#FF7F00]' : 'text-gray-700 hover:text-[#FF7F00]'}`} data-testid="nav-success-link">Success</Link>
+            <Link to="/announcements" className={`transition ${isDark ? 'text-gray-300 hover:text-[#FF7F00]' : 'text-gray-700 hover:text-[#FF7F00]'}`} data-testid="nav-announcements-link">Announcements</Link>
+            <Link to="/courses" className={`transition ${isDark ? 'text-gray-300 hover:text-[#FF7F00]' : 'text-gray-700 hover:text-[#FF7F00]'}`} data-testid="nav-courses-link">Courses</Link>
             <Button
               onClick={toggleTheme}
               variant="outline"
               size="icon"
-              className="border-border"
+              className={isDark ? 'border-[#333333] hover:bg-[#252525]' : 'border-gray-300 hover:bg-gray-100'}
               data-testid="theme-toggle-button"
             >
               {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </Button>
             <Link to="/login">
-              <Button className="bg-primary text-primary-foreground hover:bg-primary/90 font-medium" data-testid="nav-login-button">Login</Button>
+              <Button className="bg-[#FF7F00] text-white hover:bg-[#E67300] font-medium" data-testid="nav-login-button">Login</Button>
             </Link>
           </div>
         </div>

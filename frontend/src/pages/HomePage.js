@@ -67,16 +67,16 @@ const HomePage = () => {
 
       {/* Hero Section */}
       <section className="relative py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-radial from-[#FF7F00]/15 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-radial from-primary/15 via-transparent to-transparent" />
         <div className="max-w-7xl mx-auto px-6 text-center relative z-10">
-          <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-6" data-testid="hero-title">
+          <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-6 text-foreground" data-testid="hero-title">
             {content.hero_title || 'Welcome to BUTEX Debating Club'}
           </h1>
-          <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto" data-testid="hero-subtitle">
+          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto" data-testid="hero-subtitle">
             {content.hero_subtitle || 'Empowering voices, shaping leaders'}
           </p>
           <Link to="/signup">
-            <Button className="bg-[#FF7F00] text-black hover:bg-[#E67300] font-medium px-8 py-6 text-lg" data-testid="hero-get-started-button">
+            <Button className="bg-primary text-primary-foreground hover:bg-primary/90 font-medium px-8 py-6 text-lg" data-testid="hero-get-started-button">
               Get Started <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </Link>
@@ -84,19 +84,19 @@ const HomePage = () => {
       </section>
 
       {/* About Section */}
-      <section className="py-16 bg-black/40">
+      <section className="py-16 bg-card/40">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-12">
-            <Card className="bg-[#000000] border-[#333333] hover:border-[#FF7F00]/50 transition-all" data-testid="about-university-card">
+            <Card className="bg-card border-border hover:border-primary/50 transition-all" data-testid="about-university-card">
               <CardContent className="p-8">
-                <h2 className="text-3xl font-semibold mb-4 text-[#FF7F00]">About Bangladesh University of Textiles</h2>
-                <p className="text-gray-300 leading-relaxed">{content.about_university}</p>
+                <h2 className="text-3xl font-semibold mb-4 text-primary">About Bangladesh University of Textiles</h2>
+                <p className="text-muted-foreground leading-relaxed">{content.about_university}</p>
               </CardContent>
             </Card>
-            <Card className="bg-[#000000] border-[#333333] hover:border-[#FF7F00]/50 transition-all" data-testid="about-club-card">
+            <Card className="bg-card border-border hover:border-primary/50 transition-all" data-testid="about-club-card">
               <CardContent className="p-8">
-                <h2 className="text-3xl font-semibold mb-4 text-[#FF7F00]">About BUTEX Debating Club</h2>
-                <p className="text-gray-300 leading-relaxed">{content.about_club}</p>
+                <h2 className="text-3xl font-semibold mb-4 text-primary">About BUTEX Debating Club</h2>
+                <p className="text-muted-foreground leading-relaxed">{content.about_club}</p>
               </CardContent>
             </Card>
           </div>
@@ -107,44 +107,44 @@ const HomePage = () => {
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-gradient-to-br from-[#FF7F00]/10 to-transparent border border-[#333333] rounded-lg p-8" data-testid="mission-card">
-              <Trophy className="h-12 w-12 text-[#FF7F00] mb-4" />
-              <h3 className="text-2xl font-semibold mb-3">Mission</h3>
-              <p className="text-gray-300">{content.mission}</p>
+            <div className="bg-gradient-to-br from-primary/10 to-transparent border border-border rounded-lg p-8" data-testid="mission-card">
+              <Trophy className="h-12 w-12 text-primary mb-4" />
+              <h3 className="text-2xl font-semibold mb-3 text-foreground">Mission</h3>
+              <p className="text-muted-foreground">{content.mission}</p>
             </div>
-            <div className="bg-gradient-to-br from-[#FF7F00]/10 to-transparent border border-[#333333] rounded-lg p-8" data-testid="vision-card">
-              <BookOpen className="h-12 w-12 text-[#FF7F00] mb-4" />
-              <h3 className="text-2xl font-semibold mb-3">Vision</h3>
-              <p className="text-gray-300">{content.vision}</p>
+            <div className="bg-gradient-to-br from-primary/10 to-transparent border border-border rounded-lg p-8" data-testid="vision-card">
+              <BookOpen className="h-12 w-12 text-primary mb-4" />
+              <h3 className="text-2xl font-semibold mb-3 text-foreground">Vision</h3>
+              <p className="text-muted-foreground">{content.vision}</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Leadership Preview */}
-      <section className="py-16 bg-black/40">
+      <section className="py-16 bg-card/40">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex justify-between items-center mb-8">
-            <h2 className="text-4xl font-semibold" data-testid="leadership-section-title">Leadership</h2>
+            <h2 className="text-4xl font-semibold text-foreground" data-testid="leadership-section-title">Leadership</h2>
             <Link to="/leadership">
-              <Button variant="ghost" className="text-[#FF7F00] hover:text-[#E67300]" data-testid="see-full-leadership-button">
+              <Button variant="ghost" className="text-primary hover:text-primary/90" data-testid="see-full-leadership-button">
                 See Full Leadership Panel <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             {leadership.map((member) => (
-              <Card key={member.id} className="bg-[#000000] border-[#333333] hover:border-[#FF7F00]/50 transition-all overflow-hidden" data-testid={`leadership-card-${member.id}`}>
-                <div className="aspect-square bg-[#252525] flex items-center justify-center">
+              <Card key={member.id} className="bg-card border-border hover:border-primary/50 transition-all overflow-hidden" data-testid={`leadership-card-${member.id}`}>
+                <div className="aspect-square bg-muted flex items-center justify-center">
                   {member.photo_url ? (
                     <img src={member.photo_url} alt={member.name} className="w-full h-full object-cover" />
                   ) : (
-                    <Users className="h-24 w-24 text-gray-600" />
+                    <Users className="h-24 w-24 text-muted-foreground" />
                   )}
                 </div>
                 <CardContent className="p-6 text-center">
-                  <h3 className="text-xl font-semibold mb-1">{member.name}</h3>
-                  <p className="text-[#FF7F00] text-sm">{member.position}</p>
+                  <h3 className="text-xl font-semibold mb-1 text-foreground">{member.name}</h3>
+                  <p className="text-primary text-sm">{member.position}</p>
                 </CardContent>
               </Card>
             ))}
@@ -156,20 +156,20 @@ const HomePage = () => {
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex justify-between items-center mb-8">
-            <h2 className="text-4xl font-semibold" data-testid="announcements-section-title">Latest Announcements</h2>
+            <h2 className="text-4xl font-semibold text-foreground" data-testid="announcements-section-title">Latest Announcements</h2>
             <Link to="/announcements">
-              <Button variant="ghost" className="text-[#FF7F00] hover:text-[#E67300]" data-testid="see-all-announcements-button">
+              <Button variant="ghost" className="text-primary hover:text-primary/90" data-testid="see-all-announcements-button">
                 See All <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {announcements.map((ann) => (
-              <Card key={ann.id} className="bg-[#000000] border-[#333333] hover:border-[#FF7F00]/50 transition-all" data-testid={`announcement-card-${ann.id}`}>
+              <Card key={ann.id} className="bg-card border-border hover:border-primary/50 transition-all" data-testid={`announcement-card-${ann.id}`}>
                 <CardContent className="p-6">
-                  <h3 className="text-lg font-semibold mb-2">{ann.title}</h3>
-                  <p className="text-gray-400 text-sm line-clamp-3" dangerouslySetInnerHTML={{ __html: ann.content }} />
-                  <p className="text-xs text-gray-600 mt-3">{new Date(ann.created_at).toLocaleDateString()}</p>
+                  <h3 className="text-lg font-semibold mb-2 text-foreground">{ann.title}</h3>
+                  <p className="text-muted-foreground text-sm line-clamp-3" dangerouslySetInnerHTML={{ __html: ann.content }} />
+                  <p className="text-xs text-muted-foreground mt-3">{new Date(ann.created_at).toLocaleDateString()}</p>
                 </CardContent>
               </Card>
             ))}
@@ -178,10 +178,10 @@ const HomePage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-black border-t border-[#333333] py-8">
+      <footer className="bg-card border-t border-border py-8">
         <div className="max-w-7xl mx-auto px-6 text-center">
-          <p className="text-gray-500">© {new Date().getFullYear()} BUTEX Debating Club - Bangladesh University of Textiles</p>
-          <p className="text-gray-600 text-sm mt-2">contact@butexdc.edu.bd</p>
+          <p className="text-muted-foreground">© {new Date().getFullYear()} BUTEX Debating Club - Bangladesh University of Textiles</p>
+          <p className="text-muted-foreground text-sm mt-2">contact@butexdc.edu.bd</p>
         </div>
       </footer>
     </div>

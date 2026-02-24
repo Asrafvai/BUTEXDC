@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { getHomepageContent, getLeadership, getAnnouncements } from '../lib/api';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
-import { ArrowRight, Users, Trophy, BookOpen } from 'lucide-react';
+import { ArrowRight, Users, Trophy, BookOpen, Sun, Moon } from 'lucide-react';
+import { useTheme } from '../contexts/ThemeContext';
 
 const HomePage = () => {
   const [content, setContent] = useState({});

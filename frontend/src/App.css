@@ -31,12 +31,21 @@ body {
   height: 10px;
 }
 
-::-webkit-scrollbar-track {
+.dark ::-webkit-scrollbar-track {
   background: #1A1A1A;
 }
 
-::-webkit-scrollbar-thumb {
+.light ::-webkit-scrollbar-track {
+  background: #F5F5F5;
+}
+
+.dark ::-webkit-scrollbar-thumb {
   background: #333333;
+  border-radius: 5px;
+}
+
+.light ::-webkit-scrollbar-thumb {
+  background: #CCCCCC;
   border-radius: 5px;
 }
 

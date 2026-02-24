@@ -122,29 +122,29 @@ const HomePage = () => {
       </section>
 
       {/* Leadership Preview */}
-      <section className="py-16 bg-card/40">
+      <section className={`py-16 ${isDark ? 'bg-black/40' : 'bg-gray-50'}`}>
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex justify-between items-center mb-8">
-            <h2 className="text-4xl font-semibold text-foreground" data-testid="leadership-section-title">Leadership</h2>
+            <h2 className={`text-4xl font-semibold ${isDark ? 'text-white' : 'text-[#1A1A1A]'}`} data-testid="leadership-section-title">Leadership</h2>
             <Link to="/leadership">
-              <Button variant="ghost" className="text-primary hover:text-primary/90" data-testid="see-full-leadership-button">
+              <Button variant="ghost" className="text-[#FF7F00] hover:text-[#E67300]" data-testid="see-full-leadership-button">
                 See Full Leadership Panel <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             {leadership.map((member) => (
-              <Card key={member.id} className="bg-card border-border hover:border-primary/50 transition-all overflow-hidden" data-testid={`leadership-card-${member.id}`}>
-                <div className="aspect-square bg-muted flex items-center justify-center">
+              <Card key={member.id} className={`${isDark ? 'bg-[#000000] border-[#333333]' : 'bg-white border-gray-200'} hover:border-[#FF7F00]/50 transition-all overflow-hidden`} data-testid={`leadership-card-${member.id}`}>
+                <div className={`aspect-square ${isDark ? 'bg-[#252525]' : 'bg-gray-100'} flex items-center justify-center`}>
                   {member.photo_url ? (
                     <img src={member.photo_url} alt={member.name} className="w-full h-full object-cover" />
                   ) : (
-                    <Users className="h-24 w-24 text-muted-foreground" />
+                    <Users className={`h-24 w-24 ${isDark ? 'text-gray-600' : 'text-gray-400'}`} />
                   )}
                 </div>
                 <CardContent className="p-6 text-center">
-                  <h3 className="text-xl font-semibold mb-1 text-foreground">{member.name}</h3>
-                  <p className="text-primary text-sm">{member.position}</p>
+                  <h3 className={`text-xl font-semibold mb-1 ${isDark ? 'text-white' : 'text-[#1A1A1A]'}`}>{member.name}</h3>
+                  <p className="text-[#FF7F00] text-sm">{member.position}</p>
                 </CardContent>
               </Card>
             ))}
@@ -156,20 +156,20 @@ const HomePage = () => {
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex justify-between items-center mb-8">
-            <h2 className="text-4xl font-semibold text-foreground" data-testid="announcements-section-title">Latest Announcements</h2>
+            <h2 className={`text-4xl font-semibold ${isDark ? 'text-white' : 'text-[#1A1A1A]'}`} data-testid="announcements-section-title">Latest Announcements</h2>
             <Link to="/announcements">
-              <Button variant="ghost" className="text-primary hover:text-primary/90" data-testid="see-all-announcements-button">
+              <Button variant="ghost" className="text-[#FF7F00] hover:text-[#E67300]" data-testid="see-all-announcements-button">
                 See All <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {announcements.map((ann) => (
-              <Card key={ann.id} className="bg-card border-border hover:border-primary/50 transition-all" data-testid={`announcement-card-${ann.id}`}>
+              <Card key={ann.id} className={`${isDark ? 'bg-[#000000] border-[#333333]' : 'bg-white border-gray-200'} hover:border-[#FF7F00]/50 transition-all`} data-testid={`announcement-card-${ann.id}`}>
                 <CardContent className="p-6">
-                  <h3 className="text-lg font-semibold mb-2 text-foreground">{ann.title}</h3>
-                  <p className="text-muted-foreground text-sm line-clamp-3" dangerouslySetInnerHTML={{ __html: ann.content }} />
-                  <p className="text-xs text-muted-foreground mt-3">{new Date(ann.created_at).toLocaleDateString()}</p>
+                  <h3 className={`text-lg font-semibold mb-2 ${isDark ? 'text-white' : 'text-[#1A1A1A]'}`}>{ann.title}</h3>
+                  <p className={`text-sm line-clamp-3 ${isDark ? 'text-gray-400' : 'text-gray-600'}`} dangerouslySetInnerHTML={{ __html: ann.content }} />
+                  <p className={`text-xs mt-3 ${isDark ? 'text-gray-600' : 'text-gray-500'}`}>{new Date(ann.created_at).toLocaleDateString()}</p>
                 </CardContent>
               </Card>
             ))}
@@ -178,10 +178,10 @@ const HomePage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-card border-t border-border py-8">
+      <footer className={`${isDark ? 'bg-black border-[#333333]' : 'bg-gray-100 border-gray-200'} border-t py-8`}>
         <div className="max-w-7xl mx-auto px-6 text-center">
-          <p className="text-muted-foreground">© {new Date().getFullYear()} BUTEX Debating Club - Bangladesh University of Textiles</p>
-          <p className="text-muted-foreground text-sm mt-2">contact@butexdc.edu.bd</p>
+          <p className={isDark ? 'text-gray-500' : 'text-gray-600'}>© {new Date().getFullYear()} BUTEX Debating Club - Bangladesh University of Textiles</p>
+          <p className={`text-sm mt-2 ${isDark ? 'text-gray-600' : 'text-gray-500'}`}>contact@butexdc.edu.bd</p>
         </div>
       </footer>
     </div>

@@ -1,53 +1,129 @@
-import { useEffect } from "react";
-import "@/App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import axios from "axios";
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider, useAuth } from './contexts/AuthContext';
+import { Toaster } from './components/ui/sonner';
+import { checkSetupStatus } from './lib/api';
+import './App.css';
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
+// Pages
+import SetupPage from './pages/SetupPage';
+import HomePage from './pages/HomePage';
+import LeadershipPage from './pages/LeadershipPage';
+import PreviousSuccessPage from './pages/PreviousSuccessPage';
+import AnnouncementsPage from './pages/AnnouncementsPage';
+import CoursesPage from './pages/CoursesPage';
+import LoginPage from './pages/LoginPage';
+import SignupPage from './pages/SignupPage';
+import StudentDashboard from './pages/StudentDashboard';
+import CourseDetailPage from './pages/CourseDetailPage';
+import ModulePlayerPage from './pages/ModulePlayerPage';
+import CoachPage from './pages/CoachPage';
+import AdminDashboard from './pages/admin/AdminDashboard';
 
-const Home = () => {
-  const helloWorldApi = async () => {
+// Setup check wrapper
+const SetupCheck = ({ children }) => {
+  const [checking, setChecking] = useState(true);
+  const [needsSetup, setNeedsSetup] = useState(false);
+
+  useEffect(() => {
+    checkSetup();
+  }, []);
+
+  const checkSetup = async () => {
     try {
-      const response = await axios.get(`${API}/`);
-      console.log(response.data.message);
-    } catch (e) {
-      console.error(e, `errored out requesting / api`);
+      const response = await checkSetupStatus();
+      setNeedsSetup(!response.data.is_setup_complete);
+    } catch (error) {
+      console.error('Failed to check setup:', error);
+    } finally {
+      setChecking(false);
     }
   };
 
-  useEffect(() => {
-    helloWorldApi();
-  }, []);
+  if (checking) {
+    return (
+      <div className="min-h-screen bg-[#1A1A1A] flex items-center justify-center">
+        <div className="text-[#FF7F00]">Loading...</div>
+      </div>
+    );
+  }
 
-  return (
-    <div>
-      <header className="App-header">
-        <a
-          className="App-link"
-          href="https://emergent.sh"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src="https://avatars.githubusercontent.com/in/1201222?s=120&u=2686cf91179bbafbc7a71bfbc43004cf9ae1acea&v=4" />
-        </a>
-        <p className="mt-5">Building something incredible ~!</p>
-      </header>
-    </div>
-  );
+  if (needsSetup) {
+    return <Navigate to="/setup" replace />;
+  }
+
+  return children;
+};
+
+// Protected route for authenticated users
+const ProtectedRoute = ({ children }) => {
+  const { user, loading } = useAuth();
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-[#1A1A1A] flex items-center justify-center">
+        <div className="text-[#FF7F00]">Loading...</div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return children;
+};
+
+// Admin route
+const AdminRoute = ({ children }) => {
+  const { user, loading, isAdmin } = useAuth();
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-[#1A1A1A] flex items-center justify-center">
+        <div className="text-[#FF7F00]">Loading...</div>
+      </div>
+    );
+  }
+
+  if (!user || !isAdmin) {
+    return <Navigate to="/dashboard" replace />;
+  }
+
+  return children;
 };
 
 function App() {
   return (
-    <div className="App">
+    <AuthProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />}>
-            <Route index element={<Home />} />
-          </Route>
+          {/* Setup */}
+          <Route path="/setup" element={<SetupPage />} />
+
+          {/* Public routes */}
+          <Route path="/" element={<SetupCheck><HomePage /></SetupCheck>} />
+          <Route path="/leadership" element={<SetupCheck><LeadershipPage /></SetupCheck>} />
+          <Route path="/success" element={<SetupCheck><PreviousSuccessPage /></SetupCheck>} />
+          <Route path="/announcements" element={<SetupCheck><AnnouncementsPage /></SetupCheck>} />
+          <Route path="/courses" element={<SetupCheck><CoursesPage /></SetupCheck>} />
+
+          {/* Auth routes */}
+          <Route path="/login" element={<SetupCheck><LoginPage /></SetupCheck>} />
+          <Route path="/signup" element={<SetupCheck><SignupPage /></SetupCheck>} />
+
+          {/* Protected student routes */}
+          <Route path="/dashboard" element={<ProtectedRoute><StudentDashboard /></ProtectedRoute>} />
+          <Route path="/course/:courseId" element={<ProtectedRoute><CourseDetailPage /></ProtectedRoute>} />
+          <Route path="/course/:courseId/module/:moduleId" element={<ProtectedRoute><ModulePlayerPage /></ProtectedRoute>} />
+          <Route path="/coach" element={<ProtectedRoute><CoachPage /></ProtectedRoute>} />
+
+          {/* Protected admin routes */}
+          <Route path="/admin/*" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
         </Routes>
+        <Toaster position="top-right" />
       </BrowserRouter>
-    </div>
+    </AuthProvider>
   );
 }
 

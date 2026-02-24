@@ -8,9 +8,17 @@
 
 body {
   font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+}
+
+.dark body {
   background-color: #1A1A1A;
   color: #F0F0F0;
-  line-height: 1.6;
+}
+
+.light body {
+  background-color: #FFFFFF;
+  color: #141414;
 }
 
 .mono {

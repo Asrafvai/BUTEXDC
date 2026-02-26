@@ -1,0 +1,4 @@
+{
+  "buildCommand": "cd .emergent/frontend && npm run build",
+  "outputDirectory": ".emergent/frontend/build"
+}

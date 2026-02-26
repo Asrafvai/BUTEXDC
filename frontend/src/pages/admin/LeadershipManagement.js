@@ -87,7 +87,8 @@ const LeadershipManagement = () => {
               </div>
               <div>
                 <Label htmlFor="photo_url" className="text-[#F0F0F0]">Photo URL</Label>
-                <Input id="photo_url" value={formData.photo_url} onChange={(e) => setFormData({ ...formData, photo_url: e.target.value })} className="bg-[#252525] border-[#333333] text-white" />
+                <Input id="photo_url" value={formData.photo_url} onChange={(e) => setFormData({ ...formData, photo_url: e.target.value })} placeholder="https://i.ibb.co/..." className="bg-[#252525] border-[#333333] text-white" />
+                <p className="text-xs text-gray-500 mt-1">Use ImgBB.com for easy uploads. Google Drive: convert to direct link format</p>
               </div>
               <div>
                 <Label htmlFor="order_number" className="text-[#F0F0F0]">Order</Label>

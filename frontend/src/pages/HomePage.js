@@ -41,7 +41,7 @@ const HomePage = () => {
       setLeadership(leadershipRes.data.slice(0, 3));
       setAnnouncements(announcementsRes.data.slice(0, 3));
       setSuccessStories(successRes.data.slice(0, 5));
-      setEvents(eventsRes.data.slice(0, 4));
+      setEvents(eventsRes.data.slice(0, 6));
     } catch (error) {
       console.error('Failed to load homepage data:', error);
     }

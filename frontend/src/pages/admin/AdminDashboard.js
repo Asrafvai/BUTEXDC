@@ -28,6 +28,8 @@ const AdminDashboard = () => {
 
   const navItems = [
     { path: '/admin', label: 'Overview', icon: BarChart },
+    { path: '/admin/success', label: 'Success Events', icon: Trophy },
+    { path: '/admin/coach', label: 'Coach Info', icon: GraduationCap },
     { path: '/admin/users', label: 'Users', icon: Users },
     { path: '/admin/leadership', label: 'Leadership', icon: UserCog },
     { path: '/admin/alumni', label: 'Alumni', icon: Users },
@@ -36,8 +38,6 @@ const AdminDashboard = () => {
     { path: '/admin/homepage', label: 'Homepage', icon: Home },
     { path: '/admin/courses', label: 'Courses', icon: BookOpen },
     { path: '/admin/announcements', label: 'Announcements', icon: Bell },
-    { path: '/admin/success', label: 'Success Events', icon: Trophy },
-    { path: '/admin/coach', label: 'Coach Info', icon: GraduationCap },
   ];
 
   const handleLogout = () => {

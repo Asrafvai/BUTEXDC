@@ -136,6 +136,7 @@ class Announcement(BaseModel):
     title: str
     content: str
     image_url: Optional[str] = None
+    date: Optional[str] = None
     created_at: str
     archived: bool = False
 
@@ -143,6 +144,7 @@ class AnnouncementCreate(BaseModel):
     title: str
     content: str
     image_url: Optional[str] = None
+    date: Optional[str] = None
 
 class SuccessEvent(BaseModel):
     model_config = ConfigDict(extra="ignore")

@@ -327,6 +327,7 @@ async def signup(user_data: UserSignup):
         role=user_doc["role"],
         status=user_doc["status"],
         mentorship_access=user_doc["mentorship_access"],
+        advanced_access=user_doc.get("advanced_access", False),
         batch=user_doc.get("batch"),
         last_login=user_doc["last_login"],
         created_at=user_doc["created_at"]

@@ -52,6 +52,7 @@ class UserResponse(BaseModel):
     role: str
     status: str
     mentorship_access: bool
+    advanced_access: bool = False
     batch: Optional[str] = None
     last_login: Optional[str] = None
     created_at: str

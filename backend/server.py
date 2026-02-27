@@ -214,6 +214,8 @@ class Event(BaseModel):
     name: str
     date: str
     photo_url: Optional[str] = None
+    video_link: Optional[str] = None
+    note_link: Optional[str] = None
     details: str
     archived: bool = False
     created_at: str
@@ -222,6 +224,8 @@ class EventCreate(BaseModel):
     name: str
     date: str
     photo_url: Optional[str] = None
+    video_link: Optional[str] = None
+    note_link: Optional[str] = None
     details: str
 
 class MembershipContent(BaseModel):

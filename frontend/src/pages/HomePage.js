@@ -167,42 +167,59 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Events and Sessions */}
+      {/* Events and Sessions Carousel */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex justify-between items-center mb-8">
-            <h2 className={`text-4xl font-bold ${isDark ? 'text-white' : 'text-[#1A1A1A]'}`} data-testid="events-section-title">Events and Sessions</h2>
-            <Link to="/events">
-              <Button variant="ghost" className="text-[#FF7F00] hover:text-[#E67300]" data-testid="see-all-events-button">
-                View All <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
-          </div>
+          <h2 className={`text-4xl font-bold text-center mb-12 ${isDark ? 'text-white' : 'text-[#1A1A1A]'}`} data-testid="events-section-title">Events and Sessions</h2>
           {events.length > 0 ? (
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+            <Swiper
+              modules={[Navigation, Pagination, Autoplay]}
+              spaceBetween={30}
+              slidesPerView={1}
+              navigation
+              pagination={{ clickable: true }}
+              autoplay={{ delay: 5000, disableOnInteraction: false }}
+              breakpoints={{
+                640: { slidesPerView: 1 },
+                768: { slidesPerView: 2 },
+                1024: { slidesPerView: 3 }
+              }}
+              className="events-swiper"
+            >
               {events.map((evt) => (
-                <Link to="/events" key={evt.id}>
-                  <Card className={`${isDark ? 'bg-[#000000] border-[#333333]' : 'bg-white border-gray-200'} hover:border-[#FF7F00]/50 transition-all h-full`} data-testid={`event-card-${evt.id}`}>
-                    <CardContent className="p-5">
-                      <div className="flex items-center gap-3 mb-3">
-                        <div className={`w-10 h-10 rounded-lg ${isDark ? 'bg-[#FF7F00]/10' : 'bg-[#FF7F00]/10'} flex items-center justify-center flex-shrink-0`}>
-                          <Calendar className="h-5 w-5 text-[#FF7F00]" />
-                        </div>
-                        <div className="flex items-center gap-1 text-xs text-gray-500">
-                          <Clock className="h-3 w-3" />
-                          {new Date(evt.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                        </div>
+                <SwiperSlide key={evt.id}>
+                  <Link to="/events">
+                    <Card className={`${isDark ? 'bg-[#000000] border-[#333333]' : 'bg-white border-gray-200'} hover:border-[#FF7F00]/50 transition-all h-full`} data-testid={`event-card-${evt.id}`}>
+                      <div className={`aspect-video ${isDark ? 'bg-[#252525]' : 'bg-gray-100'} flex items-center justify-center overflow-hidden`}>
+                        {evt.photo_url ? (
+                          <img src={evt.photo_url} alt={evt.name} className="w-full h-full object-cover" />
+                        ) : (
+                          <Calendar className={`h-16 w-16 ${isDark ? 'text-gray-600' : 'text-gray-400'}`} />
+                        )}
                       </div>
-                      <h3 className={`text-base font-semibold mb-2 ${isDark ? 'text-white' : 'text-[#1A1A1A]'}`}>{evt.name}</h3>
-                      {evt.details && <p className={`text-sm line-clamp-2 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{evt.details}</p>}
-                    </CardContent>
-                  </Card>
-                </Link>
+                      <CardContent className="p-6">
+                        <div className="flex items-center gap-2 text-[#FF7F00] text-sm mb-2">
+                          <Calendar className="h-4 w-4" />
+                          {new Date(evt.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+                        </div>
+                        <h3 className={`text-xl font-semibold mb-3 ${isDark ? 'text-white' : 'text-[#1A1A1A]'}`}>{evt.name}</h3>
+                        {evt.details && <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'} line-clamp-3`}>{evt.details}</p>}
+                      </CardContent>
+                    </Card>
+                  </Link>
+                </SwiperSlide>
               ))}
-            </div>
+            </Swiper>
           ) : (
             <p className={`text-center ${isDark ? 'text-gray-600' : 'text-gray-400'}`}>No events yet</p>
           )}
+          <div className="text-center mt-8">
+            <Link to="/events">
+              <Button variant="outline" className={`${isDark ? 'border-[#333333] hover:bg-[#252525]' : 'border-gray-300 hover:bg-gray-100'} text-[#FF7F00]`} data-testid="see-all-events-button">
+                View All Events and Sessions <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
 

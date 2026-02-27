@@ -43,6 +43,16 @@ const UsersManagement = () => {
     }
   };
 
+  const handleToggleAdvanced = async (userId, currentStatus) => {
+    try {
+      await toggleAdvancedAccess(userId, !currentStatus);
+      toast.success(currentStatus ? 'Advanced access revoked' : 'Advanced access granted');
+      loadUsers();
+    } catch (error) {
+      toast.error('Failed to update advanced access');
+    }
+  };
+
   const handleArchive = async (userId) => {
     try {
       await archiveUser(userId);

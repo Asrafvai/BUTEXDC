@@ -1099,6 +1099,8 @@ async def create_event(event_data: EventCreate, current_user: dict = Depends(req
         "name": event_data.name,
         "date": event_data.date,
         "photo_url": event_data.photo_url,
+        "video_link": event_data.video_link,
+        "note_link": event_data.note_link,
         "details": event_data.details,
         "archived": False,
         "created_at": datetime.now(timezone.utc).isoformat()
@@ -1114,6 +1116,8 @@ async def update_event(event_id: str, event_data: EventCreate, current_user: dic
             "name": event_data.name,
             "date": event_data.date,
             "photo_url": event_data.photo_url,
+            "video_link": event_data.video_link,
+            "note_link": event_data.note_link,
             "details": event_data.details
         }}
     )

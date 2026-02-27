@@ -24,10 +24,11 @@ const HomePage = () => {
 
   const loadData = async () => {
     try {
-      const [contentRes, leadershipRes, announcementsRes] = await Promise.all([
+      const [contentRes, leadershipRes, announcementsRes, successRes] = await Promise.all([
         getHomepageContent(),
         getLeadership(),
-        getAnnouncements()
+        getAnnouncements(),
+        getSuccessEvents()
       ]);
       
       const contentMap = {};
@@ -37,6 +38,7 @@ const HomePage = () => {
       setContent(contentMap);
       setLeadership(leadershipRes.data.slice(0, 3));
       setAnnouncements(announcementsRes.data.slice(0, 3));
+      setSuccessStories(successRes.data.slice(0, 5));
     } catch (error) {
       console.error('Failed to load homepage data:', error);
     }

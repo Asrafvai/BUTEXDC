@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getHomepageContent, getLeadership, getAnnouncements } from '../lib/api';
+import { getHomepageContent, getLeadership, getAnnouncements, getSuccessEvents } from '../lib/api';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
-import { ArrowRight, Users, Trophy, BookOpen, Sun, Moon } from 'lucide-react';
+import { ArrowRight, Users, Trophy, BookOpen, Sun, Moon, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 const HomePage = () => {
   const [content, setContent] = useState({});

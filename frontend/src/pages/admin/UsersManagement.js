@@ -98,6 +98,7 @@ const UsersManagement = () => {
                       {user.status}
                     </Badge>
                     {user.mentorship_access && <Badge className="bg-purple-600">Mentorship</Badge>}
+                    {user.advanced_access && <Badge className="bg-blue-600">Advanced</Badge>}
                   </div>
                   {user.batch && <p className="text-sm text-gray-500">Batch: {user.batch}</p>}
                 </div>

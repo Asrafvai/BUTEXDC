@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getHomepageContent, getLeadership, getAnnouncements, getSuccessEvents } from '../lib/api';
+import { getHomepageContent, getLeadership, getAnnouncements, getSuccessEvents, getEvents } from '../lib/api';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
-import { ArrowRight, Users, Trophy, BookOpen, Sun, Moon, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowRight, Users, Trophy, BookOpen, Sun, Moon, Calendar, Clock } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
@@ -16,6 +16,7 @@ const HomePage = () => {
   const [leadership, setLeadership] = useState([]);
   const [announcements, setAnnouncements] = useState([]);
   const [successStories, setSuccessStories] = useState([]);
+  const [events, setEvents] = useState([]);
   const { isDark, toggleTheme } = useTheme();
 
   useEffect(() => {
@@ -24,11 +25,12 @@ const HomePage = () => {
 
   const loadData = async () => {
     try {
-      const [contentRes, leadershipRes, announcementsRes, successRes] = await Promise.all([
+      const [contentRes, leadershipRes, announcementsRes, successRes, eventsRes] = await Promise.all([
         getHomepageContent(),
         getLeadership(),
         getAnnouncements(),
-        getSuccessEvents()
+        getSuccessEvents(),
+        getEvents()
       ]);
       
       const contentMap = {};
@@ -39,6 +41,7 @@ const HomePage = () => {
       setLeadership(leadershipRes.data.slice(0, 3));
       setAnnouncements(announcementsRes.data.slice(0, 3));
       setSuccessStories(successRes.data.slice(0, 5));
+      setEvents(eventsRes.data.slice(0, 4));
     } catch (error) {
       console.error('Failed to load homepage data:', error);
     }

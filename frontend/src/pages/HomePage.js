@@ -94,7 +94,61 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* About Section */}
+      {/* Success Stories Carousel */}
+      <section className={`py-16 ${isDark ? 'bg-black/20' : 'bg-gray-50/50'}`}>
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className={`text-4xl font-bold text-center mb-12 ${isDark ? 'text-white' : 'text-[#1A1A1A]'}`}>Our Success Stories</h2>
+          {successStories.length > 0 ? (
+            <Swiper
+              modules={[Navigation, Pagination, Autoplay]}
+              spaceBetween={30}
+              slidesPerView={1}
+              navigation
+              pagination={{ clickable: true }}
+              autoplay={{ delay: 4000, disableOnInteraction: false }}
+              breakpoints={{
+                640: { slidesPerView: 1 },
+                768: { slidesPerView: 2 },
+                1024: { slidesPerView: 3 }
+              }}
+              className="success-swiper"
+            >
+              {successStories.map((story) => (
+                <SwiperSlide key={story.id}>
+                  <Card className={`${isDark ? 'bg-[#000000] border-[#333333]' : 'bg-white border-gray-200'} hover:border-[#FF7F00]/50 transition-all h-full`}>
+                    <div className={`aspect-video ${isDark ? 'bg-[#252525]' : 'bg-gray-100'} flex items-center justify-center overflow-hidden`}>
+                      {story.image_url ? (
+                        <img src={story.image_url} alt={story.title} className="w-full h-full object-cover" />
+                      ) : (
+                        <Trophy className={`h-16 w-16 ${isDark ? 'text-gray-600' : 'text-gray-400'}`} />
+                      )}
+                    </div>
+                    <CardContent className="p-6">
+                      <div className="flex items-center gap-2 text-[#FF7F00] text-sm mb-2">
+                        <Trophy className="h-4 w-4" />
+                        {new Date(story.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short' })}
+                      </div>
+                      <h3 className={`text-xl font-semibold mb-3 ${isDark ? 'text-white' : 'text-[#1A1A1A]'}`}>{story.title}</h3>
+                      <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'} line-clamp-3`}>{story.description}</p>
+                    </CardContent>
+                  </Card>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          ) : (
+            <p className="text-center text-gray-500">No success stories yet</p>
+          )}
+          <div className="text-center mt-8">
+            <Link to="/success">
+              <Button variant="outline" className={`${isDark ? 'border-[#333333] hover:bg-[#252525]' : 'border-gray-300 hover:bg-gray-100'} text-[#FF7F00]`}>
+                View All Success Stories <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Mission & Vision */}
       <section className={`py-16 ${isDark ? 'bg-black/40' : 'bg-gray-50'}`}>
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-12">

@@ -86,3 +86,22 @@ export const uploadImage = (file) => {
     headers: { 'Content-Type': 'multipart/form-data' },
   });
 };
+
+// Alumni
+export const getAlumni = () => api.get('/alumni');
+export const createAlumni = (data) => api.post('/admin/alumni', data);
+export const updateAlumni = (alumniId, data) => api.put(`/admin/alumni/${alumniId}`, data);
+export const archiveAlumni = (alumniId) => api.patch(`/admin/alumni/${alumniId}/archive`);
+
+// Events
+export const getEvents = () => api.get('/events');
+export const createEvent = (data) => api.post('/admin/events', data);
+export const updateEvent = (eventId, data) => api.put(`/admin/events/${eventId}`, data);
+export const archiveEvent = (eventId) => api.patch(`/admin/events/${eventId}/archive`);
+
+// Membership
+export const getMembershipContent = () => api.get('/membership-content');
+export const updateMembershipContent = (data) => api.put('/admin/membership-content', data);
+
+// Advanced Course Access
+export const toggleAdvancedAccess = (userId, grant) => api.patch(`/admin/users/${userId}/advanced`, null, { params: { grant } });

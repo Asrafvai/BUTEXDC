@@ -4,7 +4,7 @@ import { getCourses, getUserProgress, getAnnouncements, getEvents } from '../lib
 import { useAuth } from '../contexts/AuthContext';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
-import { AlertCircle, BookOpen, LogOut, Calendar, Bell, ArrowRight, Clock, ChevronRight } from 'lucide-react';
+import { AlertCircle, BookOpen, LogOut, Calendar, Bell, ArrowRight, Clock, ChevronRight, Video, FileText } from 'lucide-react';
 
 const StudentDashboard = () => {
   const { user, isApproved, hasMentorshipAccess, logoutUser } = useAuth();
@@ -165,10 +165,9 @@ const StudentDashboard = () => {
             </div>
             <div className="space-y-3">
               {events.length > 0 ? events.map((evt) => (
-                <Link
-                  to="/events"
+                <div
                   key={evt.id}
-                  className="block bg-[#0A0A0A] border border-[#222] rounded-lg p-4 hover:border-[#FF7F00]/30 transition-all"
+                  className="bg-[#0A0A0A] border border-[#222] rounded-lg p-4 hover:border-[#FF7F00]/30 transition-all"
                   data-testid={`event-item-${evt.id}`}
                 >
                   <div className="flex items-start gap-3">
@@ -183,7 +182,31 @@ const StudentDashboard = () => {
                       </p>
                     </div>
                   </div>
-                </Link>
+                  <div className="flex gap-2 mt-3 ml-[52px]">
+                    {evt.video_link ? (
+                      <a href={evt.video_link} target="_blank" rel="noopener noreferrer" data-testid={`watch-btn-${evt.id}`}>
+                        <Button size="sm" className="bg-[#FF7F00] text-black hover:bg-[#E67300] text-xs h-7 px-3">
+                          <Video className="h-3 w-3 mr-1" /> Watch
+                        </Button>
+                      </a>
+                    ) : (
+                      <span className="text-[10px] text-gray-600 flex items-center gap-1" data-testid={`no-video-${evt.id}`}>
+                        <Video className="h-3 w-3" /> Not available yet
+                      </span>
+                    )}
+                    {evt.note_link ? (
+                      <a href={evt.note_link} target="_blank" rel="noopener noreferrer" data-testid={`note-btn-${evt.id}`}>
+                        <Button size="sm" variant="outline" className="border-[#FF7F00] text-[#FF7F00] hover:bg-[#FF7F00]/10 text-xs h-7 px-3">
+                          <FileText className="h-3 w-3 mr-1" /> Get Note
+                        </Button>
+                      </a>
+                    ) : (
+                      <span className="text-[10px] text-gray-600 flex items-center gap-1" data-testid={`no-note-${evt.id}`}>
+                        <FileText className="h-3 w-3" /> Not available yet
+                      </span>
+                    )}
+                  </div>
+                </div>
               )) : (
                 <p className="text-gray-600 text-sm py-4 text-center" data-testid="no-events">No events yet</p>
               )}

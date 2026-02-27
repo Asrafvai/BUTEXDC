@@ -96,6 +96,7 @@ const HomePage = () => {
             <div className="flex-1 flex flex-col justify-center">
               <h1 className={`text-5xl md:text-6xl font-bold tracking-tight mb-6 ${isDark ? 'text-white' : 'text-[#1A1A1A]'}`} data-testid="hero-title">
                 {content.hero_title || 'Welcome to BUTEX Debating Club'}
+              </h1>
               <p className={`text-xl mb-8 max-w-2xl ${isDark ? 'text-gray-400' : 'text-gray-600'}`} data-testid="hero-subtitle">
                 {content.hero_subtitle || 'Empowering voices, shaping leaders'}
               </p>

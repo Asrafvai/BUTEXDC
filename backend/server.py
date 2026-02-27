@@ -186,6 +186,56 @@ class CoachInfoUpdate(BaseModel):
     achievements: str
     image_url: Optional[str] = None
 
+# =============== NEW MODELS FOR ALUMNI, EVENTS, MEMBERSHIP ===============
+
+class Alumni(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    id: str
+    name: str
+    designation: str
+    batch: str
+    current_occupation: str
+    photo_url: Optional[str] = None
+    order_number: int
+    archived: bool = False
+    created_at: str
+
+class AlumniCreate(BaseModel):
+    name: str
+    designation: str
+    batch: str
+    current_occupation: str
+    photo_url: Optional[str] = None
+    order_number: int
+
+class Event(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    id: str
+    name: str
+    date: str
+    photo_url: Optional[str] = None
+    details: str
+    archived: bool = False
+    created_at: str
+
+class EventCreate(BaseModel):
+    name: str
+    date: str
+    photo_url: Optional[str] = None
+    details: str
+
+class MembershipContent(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    photo_url: Optional[str] = None
+    description: str
+    form_link: str
+    updated_at: str
+
+class MembershipContentUpdate(BaseModel):
+    photo_url: Optional[str] = None
+    description: str
+    form_link: str
+
 class SystemSetup(BaseModel):
     is_setup_complete: bool
 

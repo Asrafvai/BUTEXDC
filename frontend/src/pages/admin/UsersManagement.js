@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { getAllUsers, approveUser, toggleMentorship, archiveUser } from '../../lib/api';
+import { getAllUsers, approveUser, toggleMentorship, toggleAdvancedAccess, archiveUser } from '../../lib/api';
 import { Button } from '../../components/ui/button';
 import { Card, CardContent } from '../../components/ui/card';
 import { Badge } from '../../components/ui/badge';
 import { toast } from 'sonner';
-import { CheckCircle, Award, Archive } from 'lucide-react';
+import { CheckCircle, Award, Archive, GraduationCap } from 'lucide-react';
 
 const UsersManagement = () => {
   const [users, setUsers] = useState([]);

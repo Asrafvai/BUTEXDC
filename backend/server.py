@@ -306,6 +306,7 @@ async def signup(user_data: UserSignup):
         "role": "student",
         "status": "pending",
         "mentorship_access": False,
+        "advanced_access": False,
         "batch": user_data.batch,
         "reason": user_data.reason,
         "last_login": datetime.now(timezone.utc).isoformat(),

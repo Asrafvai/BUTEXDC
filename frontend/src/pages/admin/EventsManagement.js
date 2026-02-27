@@ -76,7 +76,7 @@ const EventsManagement = () => {
   return (
     <div>
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-4xl font-bold" data-testid="events-management-title">Events Management</h1>
+        <h1 className="text-4xl font-bold" data-testid="events-management-title">Events and Sessions Management</h1>
         <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
           <DialogTrigger asChild>
             <Button className="bg-[#FF7F00] text-black hover:bg-[#E67300]" onClick={() => { setEditingEvent(null); setFormData({ name: '', date: new Date().toISOString().split('T')[0], photo_url: '', details: '' }); }}>

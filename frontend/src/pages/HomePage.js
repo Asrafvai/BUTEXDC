@@ -79,18 +79,33 @@ const HomePage = () => {
       {/* Hero Section */}
       <section className="relative py-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-radial from-[#FF7F00]/15 via-transparent to-transparent" />
-        <div className="max-w-7xl mx-auto px-6 text-center relative z-10">
-          <h1 className={`text-5xl md:text-6xl font-bold tracking-tight mb-6 ${isDark ? 'text-white' : 'text-[#1A1A1A]'}`} data-testid="hero-title">
-            {content.hero_title || 'Welcome to BUTEX Debating Club'}
-          </h1>
-          <p className={`text-xl mb-8 max-w-2xl mx-auto ${isDark ? 'text-gray-400' : 'text-gray-600'}`} data-testid="hero-subtitle">
-            {content.hero_subtitle || 'Empowering voices, shaping leaders'}
-          </p>
-          <Link to="/signup">
-            <Button className="bg-[#FF7F00] text-white hover:bg-[#E67300] font-medium px-8 py-6 text-lg" data-testid="hero-get-started-button">
-              Get Started <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-          </Link>
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12 text-center md:text-left">
+            {/* Logo */}
+            <div className="flex-shrink-0">
+              <img 
+                src="https://customer-assets.emergentagent.com/job_butex-debate-hub/artifacts/34zu6d03_IMG_9171.PNG" 
+                alt="BUTEX DC Logo" 
+                className="w-48 h-48 md:w-64 md:h-64 object-contain"
+                data-testid="hero-logo"
+              />
+            </div>
+            
+            {/* Text Content */}
+            <div className="flex-1">
+              <h1 className={`text-5xl md:text-6xl font-bold tracking-tight mb-6 ${isDark ? 'text-white' : 'text-[#1A1A1A]'}`} data-testid="hero-title">
+                {content.hero_title || 'Welcome to BUTEX Debating Club'}
+              </h1>
+              <p className={`text-xl mb-8 max-w-2xl ${isDark ? 'text-gray-400' : 'text-gray-600'}`} data-testid="hero-subtitle">
+                {content.hero_subtitle || 'Empowering voices, shaping leaders'}
+              </p>
+              <Link to="/signup">
+                <Button className="bg-[#FF7F00] text-white hover:bg-[#E67300] font-medium px-8 py-6 text-lg" data-testid="hero-get-started-button">
+                  Get Started <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 

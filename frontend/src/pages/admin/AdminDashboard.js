@@ -16,6 +16,9 @@ import AnnouncementsManagement from './AnnouncementsManagement';
 import SuccessManagement from './SuccessManagement';
 import AnalyticsDashboard from './AnalyticsDashboard';
 import CoachManagement from './CoachManagement';
+import AlumniManagement from './AlumniManagement';
+import EventsManagement from './EventsManagement';
+import MembershipManagement from './MembershipManagement';
 
 const AdminDashboard = () => {
   const { user, logoutUser } = useAuth();

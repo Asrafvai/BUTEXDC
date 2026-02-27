@@ -80,13 +80,13 @@ const HomePage = () => {
       <section className="relative py-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-radial from-[#FF7F00]/15 via-transparent to-transparent" />
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="flex flex-col md:flex-row items-stretch justify-center gap-8 md:gap-12 text-center md:text-left">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12 text-center md:text-left">
             {/* Logo - equal height to hero title */}
             <div className="flex-shrink-0 flex items-center justify-center">
               <img 
                 src="https://customer-assets.emergentagent.com/job_butex-debate-hub/artifacts/34zu6d03_IMG_9171.PNG" 
                 alt="BUTEX DC Logo" 
-                className="w-auto object-contain h-28 sm:h-36 md:h-[10rem] lg:h-[11rem]"
+                className="w-auto object-contain h-40 sm:h-48 md:h-56 lg:h-64"
                 data-testid="hero-logo"
               />
             </div>

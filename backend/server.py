@@ -1027,6 +1027,145 @@ async def upload_image(file: UploadFile = File(...), current_user: dict = Depend
     
     return {"url": data_url}
 
+# =============== ALUMNI ROUTES ===============
+
+@api_router.get("/alumni", response_model=List[Alumni])
+async def get_alumni():
+    alumni_list = await db.alumni.find({"archived": False}, {"_id": 0}).sort("order_number", 1).to_list(1000)
+    return [Alumni(**alum) for alum in alumni_list]
+
+@api_router.post("/admin/alumni", response_model=Alumni)
+async def create_alumni(alumni_data: AlumniCreate, current_user: dict = Depends(require_admin)):
+    alumni_doc = {
+        "id": generate_id(),
+        "name": alumni_data.name,
+        "designation": alumni_data.designation,
+        "batch": alumni_data.batch,
+        "current_occupation": alumni_data.current_occupation,
+        "photo_url": alumni_data.photo_url,
+        "order_number": alumni_data.order_number,
+        "archived": False,
+        "created_at": datetime.now(timezone.utc).isoformat()
+    }
+    await db.alumni.insert_one(alumni_doc)
+    return Alumni(**alumni_doc)
+
+@api_router.put("/admin/alumni/{alumni_id}", response_model=Alumni)
+async def update_alumni(alumni_id: str, alumni_data: AlumniCreate, current_user: dict = Depends(require_admin)):
+    result = await db.alumni.update_one(
+        {"id": alumni_id},
+        {"$set": {
+            "name": alumni_data.name,
+            "designation": alumni_data.designation,
+            "batch": alumni_data.batch,
+            "current_occupation": alumni_data.current_occupation,
+            "photo_url": alumni_data.photo_url,
+            "order_number": alumni_data.order_number
+        }}
+    )
+    if result.modified_count == 0:
+        raise HTTPException(status_code=404, detail="Alumni not found")
+    
+    alumni = await db.alumni.find_one({"id": alumni_id}, {"_id": 0})
+    return Alumni(**alumni)
+
+@api_router.patch("/admin/alumni/{alumni_id}/archive")
+async def archive_alumni(alumni_id: str, current_user: dict = Depends(require_admin)):
+    result = await db.alumni.update_one(
+        {"id": alumni_id},
+        {"$set": {"archived": True}}
+    )
+    if result.modified_count == 0:
+        raise HTTPException(status_code=404, detail="Alumni not found")
+    return {"message": "Alumni archived"}
+
+# =============== EVENTS ROUTES ===============
+
+@api_router.get("/events", response_model=List[Event])
+async def get_events():
+    events = await db.events.find({"archived": False}, {"_id": 0}).sort("date", -1).to_list(1000)
+    return [Event(**event) for event in events]
+
+@api_router.post("/admin/events", response_model=Event)
+async def create_event(event_data: EventCreate, current_user: dict = Depends(require_admin)):
+    event_doc = {
+        "id": generate_id(),
+        "name": event_data.name,
+        "date": event_data.date,
+        "photo_url": event_data.photo_url,
+        "details": event_data.details,
+        "archived": False,
+        "created_at": datetime.now(timezone.utc).isoformat()
+    }
+    await db.events.insert_one(event_doc)
+    return Event(**event_doc)
+
+@api_router.put("/admin/events/{event_id}", response_model=Event)
+async def update_event(event_id: str, event_data: EventCreate, current_user: dict = Depends(require_admin)):
+    result = await db.events.update_one(
+        {"id": event_id},
+        {"$set": {
+            "name": event_data.name,
+            "date": event_data.date,
+            "photo_url": event_data.photo_url,
+            "details": event_data.details
+        }}
+    )
+    if result.modified_count == 0:
+        raise HTTPException(status_code=404, detail="Event not found")
+    
+    event = await db.events.find_one({"id": event_id}, {"_id": 0})
+    return Event(**event)
+
+@api_router.patch("/admin/events/{event_id}/archive")
+async def archive_event(event_id: str, current_user: dict = Depends(require_admin)):
+    result = await db.events.update_one(
+        {"id": event_id},
+        {"$set": {"archived": True}}
+    )
+    if result.modified_count == 0:
+        raise HTTPException(status_code=404, detail="Event not found")
+    return {"message": "Event archived"}
+
+# =============== MEMBERSHIP ROUTES ===============
+
+@api_router.get("/membership-content", response_model=MembershipContent)
+async def get_membership_content():
+    content = await db.membership_content.find_one({}, {"_id": 0})
+    if not content:
+        # Return default content if not set
+        return MembershipContent(
+            photo_url=None,
+            description="Join BUTEX Debating Club and be part of our community!",
+            form_link="",
+            updated_at=datetime.now(timezone.utc).isoformat()
+        )
+    return MembershipContent(**content)
+
+@api_router.put("/admin/membership-content", response_model=MembershipContent)
+async def update_membership_content(content_data: MembershipContentUpdate, current_user: dict = Depends(require_admin)):
+    await db.membership_content.delete_many({})
+    content_doc = {
+        "photo_url": content_data.photo_url,
+        "description": content_data.description,
+        "form_link": content_data.form_link,
+        "updated_at": datetime.now(timezone.utc).isoformat()
+    }
+    await db.membership_content.insert_one(content_doc)
+    return MembershipContent(**content_doc)
+
+# =============== USER MANAGEMENT UPDATES ===============
+
+@api_router.patch("/admin/users/{user_id}/advanced")
+async def toggle_advanced_access(user_id: str, grant: bool, current_user: dict = Depends(require_admin)):
+    result = await db.users.update_one(
+        {"id": user_id},
+        {"$set": {"advanced_access": grant}}
+    )
+    if result.modified_count == 0:
+        raise HTTPException(status_code=404, detail="User not found")
+    return {"message": f"Advanced course access {'granted' if grant else 'revoked'}"}
+
 # =============== MAIN APP ===============
 
 app.include_router(api_router)

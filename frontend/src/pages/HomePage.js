@@ -86,7 +86,8 @@ const HomePage = () => {
               <img 
                 src="https://customer-assets.emergentagent.com/job_butex-debate-hub/artifacts/34zu6d03_IMG_9171.PNG" 
                 alt="BUTEX DC Logo" 
-                className="w-auto object-contain h-40 sm:h-48 md:h-56 lg:h-64"
+                className="object-contain"
+                style={{ height: '220px', width: 'auto' }}
                 data-testid="hero-logo"
               />
             </div>

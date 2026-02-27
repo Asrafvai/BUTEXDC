@@ -85,6 +85,7 @@ class Course(BaseModel):
     description: str
     outline: str
     course_type: str
+    photo_url: Optional[str] = None
     archived: bool = False
     order_number: int
     created_at: str
@@ -94,6 +95,7 @@ class CourseCreate(BaseModel):
     description: str
     outline: str
     course_type: str
+    photo_url: Optional[str] = None
     order_number: int
 
 class Module(BaseModel):

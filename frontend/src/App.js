@@ -108,6 +108,9 @@ function App() {
 
             {/* Public routes */}
             <Route path="/" element={<SetupCheck><HomePage /></SetupCheck>} />
+            <Route path="/alumni" element={<SetupCheck><AlumniPage /></SetupCheck>} />
+            <Route path="/events" element={<SetupCheck><EventsPage /></SetupCheck>} />
+            <Route path="/be-a-member" element={<SetupCheck><BeAMemberPage /></SetupCheck>} />
             <Route path="/leadership" element={<SetupCheck><LeadershipPage /></SetupCheck>} />
             <Route path="/success" element={<SetupCheck><PreviousSuccessPage /></SetupCheck>} />
             <Route path="/announcements" element={<SetupCheck><AnnouncementsPage /></SetupCheck>} />

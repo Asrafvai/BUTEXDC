@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { getHomepageContent, getLeadership, getAnnouncements, getSuccessEvents, getEvents } from '../lib/api';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
-import { ArrowRight, Users, Trophy, BookOpen, Sun, Moon, Calendar, Clock } from 'lucide-react';
+import { ArrowRight, Users, Trophy, BookOpen, Sun, Moon, Calendar } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';

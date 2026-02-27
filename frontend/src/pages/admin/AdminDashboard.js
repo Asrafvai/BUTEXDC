@@ -33,7 +33,7 @@ const AdminDashboard = () => {
     { path: '/admin/users', label: 'Users', icon: Users },
     { path: '/admin/leadership', label: 'Leadership', icon: UserCog },
     { path: '/admin/alumni', label: 'Alumni', icon: Users },
-    { path: '/admin/events', label: 'Events', icon: Bell },
+    { path: '/admin/events', label: 'Events and Sessions', icon: Bell },
     { path: '/admin/membership', label: 'Membership', icon: UserCog },
     { path: '/admin/homepage', label: 'Homepage', icon: Home },
     { path: '/admin/courses', label: 'Courses', icon: BookOpen },

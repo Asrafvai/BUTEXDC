@@ -44,7 +44,7 @@ const EventsPage = () => {
           </Button>
         </Link>
         
-        <h1 className="text-5xl font-bold mb-4" data-testid="events-page-title">Upcoming Events</h1>
+        <h1 className="text-5xl font-bold mb-4" data-testid="events-page-title">Events and Sessions</h1>
         <p className="text-gray-400 mb-12">Stay updated with our latest events and activities</p>
 
         <div className="grid md:grid-cols-2 gap-8">

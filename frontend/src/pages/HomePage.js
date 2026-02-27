@@ -54,7 +54,7 @@ const HomePage = () => {
           </Link>
           <div className="flex items-center gap-6">
             <Link to="/alumni" className={`transition ${isDark ? 'text-gray-300 hover:text-[#FF7F00]' : 'text-gray-700 hover:text-[#FF7F00]'}`} data-testid="nav-alumni-link">Alumni</Link>
-            <Link to="/events" className={`transition ${isDark ? 'text-gray-300 hover:text-[#FF7F00]' : 'text-gray-700 hover:text-[#FF7F00]'}`} data-testid="nav-events-link">Events</Link>
+            <Link to="/events" className={`transition ${isDark ? 'text-gray-300 hover:text-[#FF7F00]' : 'text-gray-700 hover:text-[#FF7F00]'}`} data-testid="nav-events-link">Events and Sessions</Link>
             <Link to="/leadership" className={`transition ${isDark ? 'text-gray-300 hover:text-[#FF7F00]' : 'text-gray-700 hover:text-[#FF7F00]'}`} data-testid="nav-leadership-link">Leadership</Link>
             <Link to="/success" className={`transition ${isDark ? 'text-gray-300 hover:text-[#FF7F00]' : 'text-gray-700 hover:text-[#FF7F00]'}`} data-testid="nav-success-link">Success</Link>
             <Link to="/announcements" className={`transition ${isDark ? 'text-gray-300 hover:text-[#FF7F00]' : 'text-gray-700 hover:text-[#FF7F00]'}`} data-testid="nav-announcements-link">Announcements</Link>

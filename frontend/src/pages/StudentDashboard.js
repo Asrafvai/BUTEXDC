@@ -157,7 +157,7 @@ const StudentDashboard = () => {
           <section data-testid="events-section">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg font-semibold text-white flex items-center gap-2">
-                <Calendar className="h-5 w-5 text-[#FF7F00]" /> Upcoming Events
+                <Calendar className="h-5 w-5 text-[#FF7F00]" /> Events and Sessions
               </h2>
               <Link to="/events" className="text-[#FF7F00] text-sm hover:underline flex items-center gap-1" data-testid="view-all-events">
                 View All <ArrowRight className="h-3.5 w-3.5" />

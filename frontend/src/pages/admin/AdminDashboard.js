@@ -114,6 +114,9 @@ const AdminDashboard = () => {
             <Route index element={<AnalyticsDashboard />} />
             <Route path="users" element={<UsersManagement />} />
             <Route path="leadership" element={<LeadershipManagement />} />
+            <Route path="alumni" element={<AlumniManagement />} />
+            <Route path="events" element={<EventsManagement />} />
+            <Route path="membership" element={<MembershipManagement />} />
             <Route path="homepage" element={<HomepageEditor />} />
             <Route path="courses" element={<CoursesManagement />} />
             <Route path="announcements" element={<AnnouncementsManagement />} />

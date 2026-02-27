@@ -167,7 +167,46 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Mission & Vision */}
+      {/* Events and Sessions */}
+      <section className="py-16">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex justify-between items-center mb-8">
+            <h2 className={`text-4xl font-bold ${isDark ? 'text-white' : 'text-[#1A1A1A]'}`} data-testid="events-section-title">Events and Sessions</h2>
+            <Link to="/events">
+              <Button variant="ghost" className="text-[#FF7F00] hover:text-[#E67300]" data-testid="see-all-events-button">
+                View All <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
+          {events.length > 0 ? (
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+              {events.map((evt) => (
+                <Link to="/events" key={evt.id}>
+                  <Card className={`${isDark ? 'bg-[#000000] border-[#333333]' : 'bg-white border-gray-200'} hover:border-[#FF7F00]/50 transition-all h-full`} data-testid={`event-card-${evt.id}`}>
+                    <CardContent className="p-5">
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className={`w-10 h-10 rounded-lg ${isDark ? 'bg-[#FF7F00]/10' : 'bg-[#FF7F00]/10'} flex items-center justify-center flex-shrink-0`}>
+                          <Calendar className="h-5 w-5 text-[#FF7F00]" />
+                        </div>
+                        <div className="flex items-center gap-1 text-xs text-gray-500">
+                          <Clock className="h-3 w-3" />
+                          {new Date(evt.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                        </div>
+                      </div>
+                      <h3 className={`text-base font-semibold mb-2 ${isDark ? 'text-white' : 'text-[#1A1A1A]'}`}>{evt.name}</h3>
+                      {evt.details && <p className={`text-sm line-clamp-2 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{evt.details}</p>}
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <p className={`text-center ${isDark ? 'text-gray-600' : 'text-gray-400'}`}>No events yet</p>
+          )}
+        </div>
+      </section>
+
+      {/* About University & Club */}
       <section className={`py-16 ${isDark ? 'bg-black/40' : 'bg-gray-50'}`}>
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-12">

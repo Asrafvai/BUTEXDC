@@ -48,8 +48,8 @@ const AdminDashboard = () => {
   return (
     <div className="min-h-screen bg-[#1A1A1A] flex">
       {/* Sidebar */}
-      <div className={`fixed inset-y-0 left-0 z-50 w-64 bg-black border-r border-[#333333] transform transition-transform ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}`}>
-        <div className="flex items-center justify-between p-6 border-b border-[#333333]">
+      <div className={`fixed inset-y-0 left-0 z-50 w-64 bg-black border-r border-[#333333] transform transition-transform flex flex-col ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}`}>
+        <div className="flex-shrink-0 flex items-center justify-between p-6 border-b border-[#333333]">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-[#FF7F00] rounded flex items-center justify-center text-black font-bold">
               A
@@ -61,7 +61,7 @@ const AdminDashboard = () => {
           </button>
         </div>
         
-        <nav className="p-4 space-y-2">
+        <nav className="flex-1 overflow-y-auto p-4 space-y-2" data-testid="admin-sidebar-nav">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = location.pathname === item.path;
@@ -84,7 +84,7 @@ const AdminDashboard = () => {
           })}
         </nav>
 
-        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-[#333333]">
+        <div className="flex-shrink-0 p-4 border-t border-[#333333]">
           <div className="mb-3 px-2">
             <p className="text-sm text-gray-500">Logged in as</p>
             <p className="font-medium text-sm">{user?.full_name}</p>

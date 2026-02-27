@@ -111,6 +111,9 @@ const UsersManagement = () => {
                   <Button onClick={() => handleToggleMentorship(user.id, user.mentorship_access)} size="sm" variant="outline" data-testid={`mentorship-button-${user.id}`}>
                     <Award className="h-4 w-4 mr-1" /> {user.mentorship_access ? 'Revoke' : 'Grant'} Mentorship
                   </Button>
+                  <Button onClick={() => handleToggleAdvanced(user.id, user.advanced_access)} size="sm" variant="outline" data-testid={`advanced-button-${user.id}`}>
+                    <GraduationCap className="h-4 w-4 mr-1" /> {user.advanced_access ? 'Revoke' : 'Grant'} Advanced
+                  </Button>
                   <Button onClick={() => handleArchive(user.id)} size="sm" variant="outline" className="border-red-600 text-red-600 hover:bg-red-600 hover:text-white" data-testid={`archive-button-${user.id}`}>
                     <Archive className="h-4 w-4" />
                   </Button>

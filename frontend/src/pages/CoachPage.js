@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getCoachInfo } from '../lib/api';
+import { useAuth } from '../contexts/AuthContext';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { ArrowLeft, Award, User } from 'lucide-react';
 
 const CoachPage = () => {
   const [coach, setCoach] = useState(null);
+  const { user } = useAuth();
 
   useEffect(() => {
     loadCoachInfo();
@@ -28,9 +30,9 @@ const CoachPage = () => {
   return (
     <div className="min-h-screen bg-[#1A1A1A]">
       <div className="max-w-4xl mx-auto px-6 py-12">
-        <Link to="/dashboard">
-          <Button variant="ghost" className="mb-8 text-gray-400 hover:text-[#FF7F00]" data-testid="back-dashboard-button">
-            <ArrowLeft className="mr-2 h-4 w-4" /> Back to Dashboard
+        <Link to={user ? '/dashboard' : '/courses'}>
+          <Button variant="ghost" className="mb-8 text-gray-400 hover:text-[#FF7F00]" data-testid="back-button">
+            <ArrowLeft className="mr-2 h-4 w-4" /> {user ? 'Back to Dashboard' : 'Back to Courses'}
           </Button>
         </Link>
 

@@ -723,14 +723,10 @@ async def archive_course(course_id: str, current_user: dict = Depends(require_ad
 # =============== MODULES ===============
 
 @api_router.get("/courses/{course_id}/modules", response_model=List[Module])
-async def get_course_modules(course_id: str, current_user: dict = Depends(require_approved)):
-    # Check if user has access to mentorship course
+async def get_course_modules(course_id: str):
     course = await db.courses.find_one({"id": course_id}, {"_id": 0})
     if not course:
         raise HTTPException(status_code=404, detail="Course not found")
-    
-    if course["course_type"] == "mentorship" and not current_user.get("mentorship_access"):
-        raise HTTPException(status_code=403, detail="Mentorship access required")
     
     modules = await db.modules.find({"course_id": course_id, "archived": False}, {"_id": 0}).sort("order_number", 1).to_list(1000)
     return [Module(**module) for module in modules]

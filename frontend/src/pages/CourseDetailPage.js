@@ -4,12 +4,12 @@ import { getCourse, getCourseModules, getUserProgress } from '../lib/api';
 import { useAuth } from '../contexts/AuthContext';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
-import { ArrowLeft, PlayCircle, CheckCircle, Circle, Clock } from 'lucide-react';
+import { ArrowLeft, PlayCircle, CheckCircle, Circle, Clock, Lock } from 'lucide-react';
 import { toast } from 'sonner';
 
 const CourseDetailPage = () => {
   const { courseId } = useParams();
-  const { hasMentorshipAccess } = useAuth();
+  const { user } = useAuth();
   const [course, setCourse] = useState(null);
   const [modules, setModules] = useState([]);
   const [progress, setProgress] = useState([]);
@@ -21,26 +21,42 @@ const CourseDetailPage = () => {
 
   const loadCourseData = async () => {
     try {
-      const [courseRes, modulesRes, progressRes] = await Promise.all([
+      const [courseRes, modulesRes] = await Promise.all([
         getCourse(courseId),
-        getCourseModules(courseId),
-        getUserProgress()
+        getCourseModules(courseId)
       ]);
-      
       setCourse(courseRes.data);
       setModules(modulesRes.data);
-      setProgress(progressRes.data);
+
+      // Only fetch progress if logged in
+      if (user) {
+        try {
+          const progressRes = await getUserProgress();
+          setProgress(progressRes.data);
+        } catch {
+          // Ignore progress errors for public viewing
+        }
+      }
     } catch (error) {
       console.error('Failed to load course:', error);
       if (error.response?.status === 403) {
         toast.error('You need mentorship access to view this course');
-        navigate('/dashboard');
+        navigate(user ? '/dashboard' : '/signup');
       }
     }
   };
 
   const isModuleCompleted = (moduleId) => {
     return progress.some(p => p.module_id === moduleId && p.completed);
+  };
+
+  const handleModuleClick = (moduleId) => {
+    if (!user) {
+      toast.info('Sign up to access course modules');
+      navigate('/signup');
+    } else {
+      navigate(`/course/${courseId}/module/${moduleId}`);
+    }
   };
 
   if (!course) {
@@ -50,9 +66,9 @@ const CourseDetailPage = () => {
   return (
     <div className="min-h-screen bg-[#1A1A1A]">
       <div className="max-w-5xl mx-auto px-6 py-12">
-        <Link to="/dashboard">
-          <Button variant="ghost" className="mb-8 text-gray-400 hover:text-[#FF7F00]" data-testid="back-dashboard-button">
-            <ArrowLeft className="mr-2 h-4 w-4" /> Back to Dashboard
+        <Link to={user ? '/dashboard' : '/courses'}>
+          <Button variant="ghost" className="mb-8 text-gray-400 hover:text-[#FF7F00]" data-testid="back-button">
+            <ArrowLeft className="mr-2 h-4 w-4" /> {user ? 'Back to Dashboard' : 'Back to Courses'}
           </Button>
         </Link>
 
@@ -82,15 +98,19 @@ const CourseDetailPage = () => {
               <Card 
                 key={module.id} 
                 className="bg-[#000000] border-[#333333] hover:border-[#FF7F00]/50 transition-all cursor-pointer"
-                onClick={() => navigate(`/course/${courseId}/module/${module.id}`)}
+                onClick={() => handleModuleClick(module.id)}
                 data-testid={`module-card-${module.id}`}
               >
                 <CardContent className="p-6 flex items-center gap-4">
                   <div className="flex-shrink-0">
-                    {isModuleCompleted(module.id) ? (
-                      <CheckCircle className="h-6 w-6 text-green-500" />
+                    {user ? (
+                      isModuleCompleted(module.id) ? (
+                        <CheckCircle className="h-6 w-6 text-green-500" />
+                      ) : (
+                        <Circle className="h-6 w-6 text-gray-600" />
+                      )
                     ) : (
-                      <Circle className="h-6 w-6 text-gray-600" />
+                      <Lock className="h-5 w-5 text-gray-600" />
                     )}
                   </div>
                   <div className="flex-1">
@@ -102,12 +122,27 @@ const CourseDetailPage = () => {
                       </div>
                     )}
                   </div>
-                  <PlayCircle className="h-8 w-8 text-[#FF7F00]" />
+                  {user ? (
+                    <PlayCircle className="h-8 w-8 text-[#FF7F00]" />
+                  ) : (
+                    <span className="text-xs text-gray-500">Sign up to access</span>
+                  )}
                 </CardContent>
               </Card>
             ))}
           </div>
         </div>
+
+        {!user && (
+          <div className="mt-10 text-center">
+            <p className="text-gray-400 mb-4">Sign up to access all course modules and track your progress</p>
+            <Link to="/signup">
+              <Button className="bg-[#FF7F00] text-black hover:bg-[#E67300] px-8 py-5 text-lg" data-testid="signup-cta-button">
+                Sign Up Now
+              </Button>
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );

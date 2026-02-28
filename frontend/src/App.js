@@ -115,6 +115,8 @@ function App() {
             <Route path="/success" element={<SetupCheck><PreviousSuccessPage /></SetupCheck>} />
             <Route path="/announcements" element={<SetupCheck><AnnouncementsPage /></SetupCheck>} />
             <Route path="/courses" element={<SetupCheck><CoursesPage /></SetupCheck>} />
+            <Route path="/course/:courseId" element={<SetupCheck><CourseDetailPage /></SetupCheck>} />
+            <Route path="/coach" element={<SetupCheck><CoachPage /></SetupCheck>} />
 
             {/* Auth routes */}
             <Route path="/login" element={<SetupCheck><LoginPage /></SetupCheck>} />
@@ -122,9 +124,7 @@ function App() {
 
             {/* Protected student routes */}
             <Route path="/dashboard" element={<ProtectedRoute><StudentDashboard /></ProtectedRoute>} />
-            <Route path="/course/:courseId" element={<ProtectedRoute><CourseDetailPage /></ProtectedRoute>} />
             <Route path="/course/:courseId/module/:moduleId" element={<ProtectedRoute><ModulePlayerPage /></ProtectedRoute>} />
-            <Route path="/coach" element={<ProtectedRoute><CoachPage /></ProtectedRoute>} />
 
             {/* Protected admin routes */}
             <Route path="/admin/*" element={<AdminRoute><AdminDashboard /></AdminRoute>} />

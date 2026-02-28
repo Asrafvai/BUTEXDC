@@ -25,11 +25,7 @@ const CoursesPage = () => {
   };
 
   const handleCourseClick = (course) => {
-    if (!user) {
-      navigate('/login');
-    } else {
-      navigate(`/course/${course.id}`);
-    }
+    navigate(`/course/${course.id}`);
   };
 
   return (

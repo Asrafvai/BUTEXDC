@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { getAlumni } from '../lib/api';
 import { Card, CardContent } from '../components/ui/card';
 import { Button } from '../components/ui/button';
-import { ArrowLeft, Users, Briefcase } from 'lucide-react';
+import { ArrowLeft, Users, Briefcase, ChevronDown } from 'lucide-react';
 
 const AlumniPage = () => {
   const [alumni, setAlumni] = useState([]);
+  const [selectedBatch, setSelectedBatch] = useState('all');
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   useEffect(() => {
     loadAlumni();
@@ -21,6 +23,17 @@ const AlumniPage = () => {
     }
   };
 
+  const batches = useMemo(() => {
+    const batchSet = [...new Set(alumni.map(a => a.batch))];
+    batchSet.sort((a, b) => b.localeCompare(a));
+    return batchSet;
+  }, [alumni]);
+
+  const filteredAlumni = useMemo(() => {
+    if (selectedBatch === 'all') return alumni;
+    return alumni.filter(a => a.batch === selectedBatch);
+  }, [alumni, selectedBatch]);
+
   return (
     <div className="min-h-screen bg-[#1A1A1A]">
       <div className="max-w-7xl mx-auto px-6 py-12">
@@ -30,11 +43,59 @@ const AlumniPage = () => {
           </Button>
         </Link>
         
-        <h1 className="text-5xl font-bold mb-4" data-testid="alumni-page-title">Alumni of BUTEX DC</h1>
-        <p className="text-gray-400 mb-12">Meet our distinguished alumni who have made their mark</p>
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+          <div>
+            <h1 className="text-5xl font-bold mb-2" data-testid="alumni-page-title">Alumni of BUTEX DC</h1>
+            <p className="text-gray-400">Meet our distinguished alumni who have made their mark</p>
+          </div>
+
+          {/* Batch Dropdown */}
+          <div className="relative" data-testid="batch-dropdown">
+            <button
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+              className="flex items-center gap-2 bg-[#0A0A0A] border border-[#333] rounded-lg px-4 py-2.5 text-sm text-white hover:border-[#FF7F00]/50 transition-all min-w-[180px] justify-between"
+              data-testid="batch-dropdown-trigger"
+            >
+              <span>{selectedBatch === 'all' ? 'All Batches' : `Batch ${selectedBatch}`}</span>
+              <ChevronDown className={`h-4 w-4 text-gray-400 transition-transform ${dropdownOpen ? 'rotate-180' : ''}`} />
+            </button>
+            {dropdownOpen && (
+              <div className="absolute right-0 mt-1 z-20 bg-[#0A0A0A] border border-[#333] rounded-lg shadow-xl overflow-hidden min-w-[180px]" data-testid="batch-dropdown-menu">
+                <button
+                  onClick={() => { setSelectedBatch('all'); setDropdownOpen(false); }}
+                  className={`w-full text-left px-4 py-2.5 text-sm hover:bg-[#252525] transition-colors ${selectedBatch === 'all' ? 'text-[#FF7F00] bg-[#FF7F00]/5' : 'text-white'}`}
+                  data-testid="batch-option-all"
+                >
+                  All Batches ({alumni.length})
+                </button>
+                {batches.map(batch => {
+                  const count = alumni.filter(a => a.batch === batch).length;
+                  return (
+                    <button
+                      key={batch}
+                      onClick={() => { setSelectedBatch(batch); setDropdownOpen(false); }}
+                      className={`w-full text-left px-4 py-2.5 text-sm hover:bg-[#252525] transition-colors ${selectedBatch === batch ? 'text-[#FF7F00] bg-[#FF7F00]/5' : 'text-white'}`}
+                      data-testid={`batch-option-${batch}`}
+                    >
+                      Batch {batch} ({count})
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Selected batch header */}
+        {selectedBatch !== 'all' && (
+          <div className="mb-6 flex items-center gap-3">
+            <h2 className="text-2xl font-semibold text-[#FF7F00]" data-testid="batch-heading">Batch {selectedBatch}</h2>
+            <span className="text-gray-500 text-sm">({filteredAlumni.length} alumni)</span>
+          </div>
+        )}
 
         <div className="grid md:grid-cols-3 gap-8">
-          {alumni.map((alum) => (
+          {filteredAlumni.map((alum) => (
             <Card key={alum.id} className="bg-[#000000] border-[#333333] hover:border-[#FF7F00]/50 transition-all hover-lift overflow-hidden" data-testid={`alumni-card-${alum.id}`}>
               <div className="aspect-square bg-[#252525] flex items-center justify-center">
                 {alum.photo_url ? (
@@ -56,10 +117,10 @@ const AlumniPage = () => {
           ))}
         </div>
 
-        {alumni.length === 0 && (
+        {filteredAlumni.length === 0 && (
           <div className="text-center py-12">
             <Users className="h-16 w-16 text-gray-600 mx-auto mb-4" />
-            <p className="text-gray-500">No alumni profiles yet</p>
+            <p className="text-gray-500">{selectedBatch === 'all' ? 'No alumni profiles yet' : `No alumni in Batch ${selectedBatch}`}</p>
           </div>
         )}
       </div>

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { getHomepageContent, getLeadership, getAnnouncements, getSuccessEvents, getEvents } from '../lib/api';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
-import { ArrowRight, Users, Trophy, BookOpen, Sun, Moon, Calendar } from 'lucide-react';
+import { ArrowRight, Users, Trophy, BookOpen, Sun, Moon, Calendar, Facebook } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
@@ -313,6 +313,28 @@ const HomePage = () => {
                 </CardContent>
               </Card>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Connect on Social Media */}
+      <section className={`py-16 ${isDark ? 'bg-black/20' : 'bg-gray-50/50'}`}>
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <h2 className={`text-4xl font-bold mb-4 ${isDark ? 'text-white' : 'text-[#1A1A1A]'}`} data-testid="social-section-title">Connect with Us on Social Media</h2>
+          <p className={`mb-8 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>Stay updated with our latest news, events, and achievements</p>
+          <div className="flex items-center justify-center gap-4 flex-wrap">
+            <a href="https://www.facebook.com/BUTEXDC" target="_blank" rel="noopener noreferrer" data-testid="facebook-page-btn">
+              <Button className="bg-[#1877F2] text-white hover:bg-[#166FE5] font-medium px-6 py-5 text-base gap-2">
+                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                Facebook Page
+              </Button>
+            </a>
+            <a href="https://www.facebook.com/groups/BUTexDC" target="_blank" rel="noopener noreferrer" data-testid="facebook-group-btn">
+              <Button className="bg-[#1877F2] text-white hover:bg-[#166FE5] font-medium px-6 py-5 text-base gap-2">
+                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                Facebook Group
+              </Button>
+            </a>
           </div>
         </div>
       </section>

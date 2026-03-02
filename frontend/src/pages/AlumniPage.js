@@ -123,7 +123,13 @@ const AlumniPage = () => {
         {alumni.length === 0 && (
           <div className="text-center py-12">
             <Users className="h-16 w-16 text-gray-600 mx-auto mb-4" />
-            <p className="text-gray-500">{selectedBatch === 'all' ? 'No alumni profiles yet' : `No alumni in Batch ${selectedBatch}`}</p>
+            <p className="text-gray-500">No alumni profiles yet</p>
+          </div>
+        )}
+        {selectedBatch !== 'all' && filteredAlumni.length === 0 && (
+          <div className="text-center py-12">
+            <Users className="h-16 w-16 text-gray-600 mx-auto mb-4" />
+            <p className="text-gray-500">No alumni in Batch {selectedBatch}</p>
           </div>
         )}
       </div>

@@ -94,30 +94,33 @@ const AlumniPage = () => {
           </div>
         )}
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {filteredAlumni.map((alum) => (
-            <Card key={alum.id} className="bg-[#000000] border-[#333333] hover:border-[#FF7F00]/50 transition-all hover-lift overflow-hidden" data-testid={`alumni-card-${alum.id}`}>
-              <div className="aspect-square bg-[#252525] flex items-center justify-center">
-                {alum.photo_url ? (
-                  <img src={alum.photo_url} alt={alum.name} className="w-full h-full object-cover" />
-                ) : (
-                  <Users className="h-24 w-24 text-gray-600" />
-                )}
-              </div>
-              <CardContent className="p-6">
-                <h3 className="text-xl font-semibold mb-2 text-white">{alum.name}</h3>
-                <p className="text-[#FF7F00] text-sm mb-1">{alum.designation}</p>
-                <p className="text-gray-500 text-xs mb-3">Batch: {alum.batch}</p>
-                <div className="flex items-start gap-2 text-sm text-gray-400">
-                  <Briefcase className="h-4 w-4 mt-0.5 flex-shrink-0 text-[#FF7F00]" />
-                  <p>{alum.current_occupation}</p>
+        {selectedBatch === 'all' ? (
+          /* Grouped by batch */
+          batches.map(batch => {
+            const batchAlumni = alumni.filter(a => a.batch === batch);
+            return (
+              <div key={batch} className="mb-10" data-testid={`batch-group-${batch}`}>
+                <div className="flex items-center gap-3 mb-5 border-b border-[#333] pb-3">
+                  <h2 className="text-2xl font-semibold text-[#FF7F00]">Batch {batch}</h2>
+                  <span className="text-gray-500 text-sm">({batchAlumni.length})</span>
                 </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+                <div className="grid md:grid-cols-3 gap-8">
+                  {batchAlumni.map((alum) => (
+                    <AlumniCard key={alum.id} alum={alum} />
+                  ))}
+                </div>
+              </div>
+            );
+          })
+        ) : (
+          <div className="grid md:grid-cols-3 gap-8">
+            {filteredAlumni.map((alum) => (
+              <AlumniCard key={alum.id} alum={alum} />
+            ))}
+          </div>
+        )}
 
-        {filteredAlumni.length === 0 && (
+        {alumni.length === 0 && (
           <div className="text-center py-12">
             <Users className="h-16 w-16 text-gray-600 mx-auto mb-4" />
             <p className="text-gray-500">{selectedBatch === 'all' ? 'No alumni profiles yet' : `No alumni in Batch ${selectedBatch}`}</p>

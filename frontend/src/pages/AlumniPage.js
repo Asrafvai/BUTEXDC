@@ -5,6 +5,27 @@ import { Card, CardContent } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { ArrowLeft, Users, Briefcase, ChevronDown } from 'lucide-react';
 
+const AlumniCard = ({ alum }) => (
+  <Card className="bg-[#000000] border-[#333333] hover:border-[#FF7F00]/50 transition-all hover-lift overflow-hidden" data-testid={`alumni-card-${alum.id}`}>
+    <div className="aspect-square bg-[#252525] flex items-center justify-center">
+      {alum.photo_url ? (
+        <img src={alum.photo_url} alt={alum.name} className="w-full h-full object-cover" />
+      ) : (
+        <Users className="h-24 w-24 text-gray-600" />
+      )}
+    </div>
+    <CardContent className="p-6">
+      <h3 className="text-xl font-semibold mb-2 text-white">{alum.name}</h3>
+      <p className="text-[#FF7F00] text-sm mb-1">{alum.designation}</p>
+      <p className="text-gray-500 text-xs mb-3">Batch: {alum.batch}</p>
+      <div className="flex items-start gap-2 text-sm text-gray-400">
+        <Briefcase className="h-4 w-4 mt-0.5 flex-shrink-0 text-[#FF7F00]" />
+        <p>{alum.current_occupation}</p>
+      </div>
+    </CardContent>
+  </Card>
+);
+
 const AlumniPage = () => {
   const [alumni, setAlumni] = useState([]);
   const [selectedBatch, setSelectedBatch] = useState('all');
